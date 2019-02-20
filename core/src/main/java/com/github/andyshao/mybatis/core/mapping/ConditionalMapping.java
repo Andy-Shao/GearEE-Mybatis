@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.github.andyshao.mybatis.core.dto.Conditional;
+import com.github.andyshao.mybatis.core.dto.Sort;
 import com.github.andyshao.mybatis.core.mapping.impl.Mappers;
 
 /**
@@ -28,6 +29,9 @@ import com.github.andyshao.mybatis.core.mapping.impl.Mappers;
 public interface ConditionalMapping<ENTITY, PK extends Serializable> {
 	@Select(Mappers.GENERIC_DAO_QUERY)
     List<ENTITY> findByConditional(@Param(Mappers.DEFAULT_CONDITIONAL_NAME) Conditional conditional);
+	@Select(Mappers.GENERIC_DAO_QUERY)
+	List<ENTITY> findByConditionalAndSort(@Param(Mappers.DEFAULT_CONDITIONAL_NAME) Conditional conditional,
+										  @Param(Mappers.DEFAULT_SORT_NAME) Sort sort);
 	@Delete(Mappers.GENERIC_DAO_QUERY)
     int deleteByConditional(@Param(Mappers.DEFAULT_CONDITIONAL_NAME)Conditional conditional);
 	@Update(Mappers.GENERIC_DAO_QUERY)

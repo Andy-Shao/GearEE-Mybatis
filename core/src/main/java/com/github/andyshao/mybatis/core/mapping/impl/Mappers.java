@@ -18,4 +18,5 @@ public final class Mappers {
 	public static final String DEFAULT_ENTITY_NAME = "entity";
 	public static final String DEFAULT_CONDITIONAL_NAME = "cond";
 	public static final String DEFAULT_SETS_NAME = "sets";
+	public static final String DEFAULT_SORT_NAME = "sort";
 }

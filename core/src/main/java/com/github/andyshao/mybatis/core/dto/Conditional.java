@@ -19,11 +19,14 @@ import lombok.Setter;
  */
 @Getter
 public class Conditional {
-	@Setter
-    protected String orderByClause;
     @Setter
     protected boolean distinct = false;
+    protected final Class<?> domainClass;
     protected List<Criteria> oredCriteria = new ArrayList<>();
+    
+    public Conditional(Class<?> domainClass) {
+    	this.domainClass = domainClass;
+    }
 
     public void or(Criteria criteria) {
         this.oredCriteria.add(criteria);
@@ -44,13 +47,19 @@ public class Conditional {
     }
 
     protected Criteria createCriteriaInternal() {
-        Criteria criteria = Criteria.builder().build();
+        Criteria criteria = Criteria.builder()
+        		.conditional(this)
+        		.build();
         return criteria;
     }
 
     public void clear() {
         this.oredCriteria.clear();
-        this.orderByClause = null;
         this.distinct = false;
+    }
+    
+    public String getColumn(String property) {
+    	// TODO
+    	return null;
     }
 }

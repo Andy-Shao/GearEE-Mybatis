@@ -21,7 +21,7 @@ import lombok.Getter;
 @Builder
 public class Criteria {
 	private String condition;
-    private  String column;
+    private String column;
     private Object value;
     private Object secondValue;
     private boolean noValue;
@@ -31,6 +31,7 @@ public class Criteria {
     private boolean valid;
     private String typeHandler;
     private List<Criteria> criteriaList;
+    private Conditional conditional;
 
     public static class CriteriaBuilder {
         private boolean valid = false;
@@ -45,10 +46,11 @@ public class Criteria {
             this.valid = true;
         }
         Criteria.CriteriaBuilder builder = Criteria.builder()
+        		.conditional(this.conditional)
                 .valid(true)
                 .condition(condition)
                 .value(value)
-                .column(property)
+                .column(this.conditional.getColumn(property))
                 .typeHandler(null);
         if(value instanceof List) {
             builder.listValue(true);
@@ -66,11 +68,12 @@ public class Criteria {
             this.valid = true;
         }
         this.criteriaList.add(Criteria.builder()
+        		.conditional(this.conditional)
                 .valid(true)
                 .condition(condition)
                 .typeHandler(null)
                 .noValue(true)
-                .column(property)
+                .column(this.conditional.getColumn(property))
                 .build());
     }
 
@@ -82,11 +85,12 @@ public class Criteria {
             this.valid = true;
         }
         this.criteriaList.add(Criteria.builder()
+        		.conditional(this.conditional)
                 .valid(true)
                 .condition(condition)
                 .value(value1)
                 .secondValue(value2)
-                .column(property)
+                .column(this.conditional.getColumn(property))
                 .typeHandler(null)
                 .betweenValue(true)
                 .build());

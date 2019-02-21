@@ -2,6 +2,13 @@ package com.github.andyshao.mybatis.core.mapping;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.github.andyshao.mybatis.core.dto.Page;
+import com.github.andyshao.mybatis.core.dto.Pageable;
+import com.github.andyshao.mybatis.core.dto.Slice;
+import com.github.andyshao.mybatis.core.mapping.impl.Mappers;
+
 /**
  * 
  * 
@@ -16,5 +23,6 @@ import java.io.Serializable;
  * @param <PK> primary key
  */
 public interface PageMapping<ENTITY, PK extends Serializable> {
-
+	Page<ENTITY> findByPage(@Param(Mappers.DEFAULT_PAGE_NAME) Pageable page);
+	Slice<ENTITY> findBySlice(@Param(Mappers.DEFAULT_PAGE_NAME) Pageable page);
 }

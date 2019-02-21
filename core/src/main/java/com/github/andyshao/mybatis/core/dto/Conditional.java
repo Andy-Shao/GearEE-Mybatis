@@ -23,9 +23,23 @@ public class Conditional {
     protected boolean distinct = false;
     protected final Class<?> domainClass;
     protected List<Criteria> oredCriteria = new ArrayList<>();
+    private static volatile Conditional NO_CONDITIONAL;
     
     public Conditional(Class<?> domainClass) {
     	this.domainClass = domainClass;
+    }
+    
+    private Conditional() {
+    	this(null);
+    }
+    
+    public static Conditional excludeCondition() {
+    	if(NO_CONDITIONAL == null) {
+    		synchronized (Conditional.class) {
+    			if(NO_CONDITIONAL == null) NO_CONDITIONAL = new Conditional();
+			}
+    	}
+    	return NO_CONDITIONAL;
     }
 
     public void or(Criteria criteria) {

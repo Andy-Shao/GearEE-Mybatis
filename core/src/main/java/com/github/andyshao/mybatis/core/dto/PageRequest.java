@@ -14,8 +14,12 @@ package com.github.andyshao.mybatis.core.dto;
 public final class PageRequest {
 	private PageRequest() {}
 	
-	public static Pageable of(int pageNumber, int pageSize,Conditional conditional, Sort sort) {
+	public static Pageable of(int pageNumber, int pageSize, Conditional conditional, Sort sort) {
 		// TODO
 		return null;
+	}
+	
+	public static Pageable of(int pageNumber, int pagSize) {
+		return of(pageNumber, pagSize, Conditional.excludeCondition(), Sort.unsorted());
 	}
 }

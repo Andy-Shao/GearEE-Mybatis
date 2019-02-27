@@ -31,7 +31,7 @@ public interface Slice<T> {
 	default Pageable getPageable() {
 		return PageRequest.of(this.getNumber(), this.getSize(), this.getConditional(), this.getSort());
 	}
-	Pageable nexPageable();
+	Pageable nextPageable();
 	Pageable previousPageable();
 	<U> Slice<U> map(Function<? super T, ? extends U> converter);
 }

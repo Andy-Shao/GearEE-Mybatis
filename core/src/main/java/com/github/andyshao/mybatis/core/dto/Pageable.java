@@ -29,7 +29,7 @@ public interface Pageable {
 	int getPageSize();
 	long getOffset();
 	Sort getSort();
-	Conditional conditional();
+	Conditional getConditional();
 	default Sort getSortOr(Sort sort) {
 		return getSort().isSorted() ? getSort() : sort;
 	}

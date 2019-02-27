@@ -1,13 +1,22 @@
 package com.github.andyshao.mybatis.core.mapping.impl;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
+import com.github.andyshao.lang.StringOperation;
+import com.github.andyshao.mybatis.core.annotation.Column;
+import com.github.andyshao.mybatis.core.annotation.Id;
 import com.github.andyshao.mybatis.core.mapping.ConditionalMapping;
 import com.github.andyshao.mybatis.core.mapping.CoreMapping;
 import com.github.andyshao.mybatis.core.mapping.CurdMapping;
 import com.github.andyshao.mybatis.core.mapping.PageMapping;
 import com.github.andyshao.reflect.ClassOperation;
+import com.github.andyshao.reflect.FieldOperation;
 
 import lombok.NonNull;
 
@@ -35,6 +44,29 @@ public final class Mappers {
 	public static final Class[] GENERIC_DAO_CLASS = new Class[] {
             CoreMapping.class, CurdMapping.class, ConditionalMapping.class, PageMapping.class
     };
+	
+	public static final String getColumnName(@NonNull Field field) {
+		Column column = field.getAnnotation(Column.class);
+		Id id = field.getAnnotation(Id.class);
+		if(Objects.nonNull(column)) {
+			if(StringOperation.isTrimEmptyOrNull(column.value())) return column.value();
+			else return field.getName();
+		}
+		if(Objects.nonNull(id)) {
+			if(StringOperation.isTrimEmptyOrNull(id.value())) return id.value();
+			else return field.getName();
+		}
+		return field.getName();
+	}
+	
+	public static final Map<String, String> getColumnNames(Class<?> domainClass) {
+		Map<String, String> ret = new HashMap<String, String>();
+		FieldOperation.superGetAllFieldForSet(domainClass)
+			.stream()
+			.filter(field -> !Modifier.isStatic(field.getModifiers()) || !Modifier.isFinal(field.getModifiers()))
+			.forEach(field -> ret.put(field.getName(), getColumnName(field)));
+		return ret;
+	}
 	
 	@SuppressWarnings("rawtypes")
 	public static final Class[] getGenericType(@NonNull Class<?> customMapper) {

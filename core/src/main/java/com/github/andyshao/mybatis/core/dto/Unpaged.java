@@ -60,8 +60,8 @@ public enum Unpaged implements Pageable {
 	}
 
 	@Override
-	public Conditional conditional() {
-		return new Conditional();
+	public Conditional getConditional() {
+		return Conditional.excludeCondition();
 	}
 
 }

@@ -15,8 +15,12 @@ public final class PageRequest {
 	private PageRequest() {}
 	
 	public static Pageable of(int pageNumber, int pageSize, Conditional conditional, Sort sort) {
-		// TODO
-		return null;
+		return new PageableImpl.PageableImplBuilder()
+				.pageNumber(pageNumber)
+				.pageSize(pageSize)
+				.conditional(conditional)
+				.sort(sort)
+				.build();
 	}
 	
 	public static Pageable of(int pageNumber, int pagSize) {

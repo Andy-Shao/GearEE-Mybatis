@@ -1,7 +1,11 @@
 package com.github.andyshao.mybatis.core.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import com.github.andyshao.mybatis.core.mapping.impl.Mappers;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,12 +22,14 @@ import lombok.Setter;
  *
  */
 @Getter
-public class Conditional {
-    @Setter
+public class Conditional implements Serializable{
+	private static final long serialVersionUID = -8757030312995023290L;
+	@Setter
     protected boolean distinct = false;
     protected final Class<?> domainClass;
     protected List<Criteria> oredCriteria = new ArrayList<>();
     private static volatile Conditional NO_CONDITIONAL;
+    private volatile Map<String, String> columns;
     
     public Conditional(Class<?> domainClass) {
     	this.domainClass = domainClass;
@@ -73,7 +79,13 @@ public class Conditional {
     }
     
     public String getColumn(String property) {
-    	// TODO
-    	return null;
+    	if(columns == null) {
+    		synchronized (this) {
+				if(columns == null) {
+					this.columns = Mappers.getColumnNames(this.domainClass);
+				}
+			}
+    	}
+    	return columns.get(property);
     }
 }

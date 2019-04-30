@@ -15,12 +15,9 @@ import java.util.function.Function;
  * @param <T> data type
  */
 public interface Page<T> extends Slice<T>{
+	@SuppressWarnings("unchecked")
 	static <T> Page<T> empty() {
-		return empty(Pageable.unpaged());
-	}
-	static <T> Page<T> empty(Pageable pageable) {
-		//TODO 
-		return null;
+		return (Page<T>) PageOperation.EMPTY;
 	}
 	
 	int getTotalPages();

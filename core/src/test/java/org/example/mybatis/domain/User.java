@@ -28,10 +28,10 @@ public class User {
     private String password;
     @Column("create_user")
     private String createUser;
-    @Column("create_time")
+    @Column(value = "create_time", jdbcType = "TIMESTAMP")
     private LocalDate createTime;
     @Column("update_user")
     private String updateUser;
-    @Column("update_time")
+    @Column(value = "update_time", jdbcType = "TIMESTAMP")
     private LocalDate updateTime;
 }

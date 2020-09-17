@@ -22,5 +22,6 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Column {
     String value() default "";
+    String jdbcType() default "VARCHAR";
     boolean isIgnore() default false;
 }

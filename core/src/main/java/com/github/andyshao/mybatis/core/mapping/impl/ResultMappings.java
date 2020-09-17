@@ -5,6 +5,7 @@ import org.apache.ibatis.mapping.ResultMapping;
 import org.apache.ibatis.session.Configuration;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Title: <br>
@@ -15,10 +16,6 @@ import java.util.List;
  * @author Andy.Shao
  */
 public final class ResultMappings {
-    public static List<ResultMapping> buildListResultMapping(Class<?> resultType, Configuration configuration) {
-        // TODO
-        return null;
-    }
 
     public static List<ResultMapping> buildDomainClassResultMapping(
             Class<?> resultType, Configuration configuration, Entity entity) {
@@ -27,7 +24,8 @@ public final class ResultMappings {
     }
 
     public static boolean isDomainClass(Class<?> resultType) {
-        // TODO
-        return false;
+        final com.github.andyshao.mybatis.core.annotation.Entity annotation =
+                resultType.getAnnotation(com.github.andyshao.mybatis.core.annotation.Entity.class);
+        return Objects.nonNull(annotation);
     }
 }

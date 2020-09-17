@@ -1,5 +1,7 @@
 package com.github.andyshao.mybatis.core.annotation;
 
+import com.github.andyshao.mybatis.core.model.Property;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -22,6 +24,6 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Column {
     String value() default "";
-    String jdbcType() default "VARCHAR";
+    String jdbcType() default Property.DEFAULT_JDBC_TYPE;
     boolean isIgnore() default false;
 }

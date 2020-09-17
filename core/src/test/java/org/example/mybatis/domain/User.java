@@ -17,7 +17,7 @@ import java.time.LocalDate;
  *
  * @author Andy.Shao
  */
-@Entity
+@Entity(tableName = "user")
 @Getter
 @Setter
 @EqualsAndHashCode(of = "username")

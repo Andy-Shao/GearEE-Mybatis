@@ -26,10 +26,8 @@ public class AnnotationResultMappingFactory implements ResultMappingFactory {
         } else if(ResultMappings.isDomainClass(resultType)) {
             final Entity entity = AnnotationEntityAnalysis.analysis(resultType);
             return ResultMappings.buildDomainClassResultMapping(resultType, configuration, entity);
-        } else if(List.class.isAssignableFrom(resultType)) {
-            return ResultMappings.buildListResultMapping(resultType, configuration);
         }
-        throw new UnsupportedOperationException();
+        return Collections.emptyList();
     }
 
 }

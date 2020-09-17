@@ -1,33 +1,29 @@
 package com.github.andyshao.mybatis.core.plugin;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
-
-import org.apache.ibatis.executor.Executor;
-import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.mapping.ResultMap;
-import org.apache.ibatis.mapping.ResultMapping;
-import org.apache.ibatis.mapping.SqlSource;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.plugin.Intercepts;
-import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Plugin;
-import org.apache.ibatis.plugin.Signature;
-import org.apache.ibatis.scripting.xmltags.XMLLanguageDriver;
-import org.apache.ibatis.session.Configuration;
-import org.apache.ibatis.session.ResultHandler;
-import org.apache.ibatis.session.RowBounds;
-
+import com.github.andyshao.mybatis.core.mapping.impl.AnnotationResultMappingFactory;
 import com.github.andyshao.mybatis.core.mapping.impl.GenericScriptSqlProvider;
 import com.github.andyshao.mybatis.core.mapping.impl.Mappers;
 import com.github.andyshao.reflect.ClassOperation;
 import com.github.andyshao.reflect.FieldOperation;
 import com.github.andyshao.reflect.InvocationTargetException;
 import com.github.andyshao.reflect.MethodOperation;
+import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.ResultMap;
+import org.apache.ibatis.mapping.ResultMapping;
+import org.apache.ibatis.mapping.SqlSource;
+import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.scripting.xmltags.XMLLanguageDriver;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ResultHandler;
+import org.apache.ibatis.session.RowBounds;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Properties;
 
 @Intercepts({
     @Signature(type = Executor.class, method = "query",
@@ -36,7 +32,7 @@ import com.github.andyshao.reflect.MethodOperation;
         args = {MappedStatement.class, Object.class})
 })
 public class AutoInjectSqlPlugin implements Interceptor {
-//	private final AnnotationResultMappingFactory resultMappingFactory = new AnnotationResultMappingFactory();
+	private final AnnotationResultMappingFactory resultMappingFactory = new AnnotationResultMappingFactory();
 
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
@@ -69,10 +65,7 @@ public class AutoInjectSqlPlugin implements Interceptor {
     void provideResultMap(MappedStatement mappedStatement, Configuration configuration) {
         String resultMapId = parseResultMappingId(mappedStatement);
         Class<?> resultType = parseResultType(mappedStatement);
-//        List<ResultMapping> resultMappings = resultMappingFactory.build(resultType,
-//                configuration);
-        // TODO
-        List<ResultMapping> resultMappings = null;
+        List<ResultMapping> resultMappings = resultMappingFactory.buildResultMapping(resultType, configuration);
         ResultMap resultMap = new ResultMap.Builder(configuration, resultMapId, resultType, resultMappings)
                 .build();
         List<ResultMap> resultMaps = Collections.singletonList(resultMap);

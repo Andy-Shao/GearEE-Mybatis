@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.example.mybatis.domain.User;
 
+import java.util.List;
+
 /**
  * Title: <br>
  * Description: <br>
@@ -21,4 +23,11 @@ public interface UserMapping extends CoreMapping<User> {
     @Select("SELECT * FROM user WHERE user_name=#{username}")
     @ResultMap("DEFAULT_RESULT_MAP")
     User findByUsername(@Param("username") String username);
+
+    @Select("SELECT * FROM user")
+    @ResultMap("DEFAULT_RESULT_MAP")
+    List<User> findAllUsers();
+
+    @Select("SELECT count(*) FROM user")
+    int userNumber();
 }

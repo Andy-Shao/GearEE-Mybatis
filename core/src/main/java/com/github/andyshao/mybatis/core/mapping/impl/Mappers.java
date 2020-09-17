@@ -1,26 +1,24 @@
 package com.github.andyshao.mybatis.core.mapping.impl;
 
+import com.github.andyshao.lang.StringOperation;
+import com.github.andyshao.mybatis.core.annotation.Column;
+import com.github.andyshao.mybatis.core.annotation.Entity;
+import com.github.andyshao.mybatis.core.mapping.ConditionalMapping;
+import com.github.andyshao.mybatis.core.mapping.CoreMapping;
+import com.github.andyshao.mybatis.core.mapping.CurdMapping;
+import com.github.andyshao.mybatis.core.mapping.PageMapping;
+import com.github.andyshao.mybatis.core.model.AnnotationEntityAnalysis;
+import com.github.andyshao.reflect.ClassOperation;
+import com.github.andyshao.reflect.FieldOperation;
+import com.github.andyshao.util.ObjectOperation;
+import lombok.NonNull;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-
-import com.github.andyshao.lang.StringOperation;
-import com.github.andyshao.mybatis.core.annotation.Column;
-import com.github.andyshao.mybatis.core.annotation.Entity;
-import com.github.andyshao.mybatis.core.annotation.Id;
-import com.github.andyshao.mybatis.core.mapping.ConditionalMapping;
-import com.github.andyshao.mybatis.core.mapping.CoreMapping;
-import com.github.andyshao.mybatis.core.mapping.CurdMapping;
-import com.github.andyshao.mybatis.core.mapping.PageMapping;
-import com.github.andyshao.reflect.ClassOperation;
-import com.github.andyshao.reflect.FieldOperation;
-
-import com.github.andyshao.util.ObjectOperation;
-import lombok.NonNull;
 
 /**
  * 
@@ -49,19 +47,10 @@ public final class Mappers {
 	
 	public static final String getColumnName(@NonNull Field field) {
 		Column column = field.getAnnotation(Column.class);
-		Id id = field.getAnnotation(Id.class);
-		if(Objects.nonNull(column)) {
-			if(StringOperation.isTrimEmptyOrNull(column.value())) return column.value();
-			else return field.getName();
-		}
-		if(Objects.nonNull(id)) {
-			if(StringOperation.isTrimEmptyOrNull(id.value())) return id.value();
-			else return field.getName();
-		}
-		return field.getName();
-	}
-	
-	public static final Map<String, String> getColumnNames(Class<?> domainClass) {
+        return AnnotationEntityAnalysis.getColumnName(field, column);
+    }
+
+    public static final Map<String, String> getColumnNames(Class<?> domainClass) {
 		Map<String, String> ret = new HashMap<String, String>();
 		FieldOperation.superGetAllFieldForSet(domainClass)
 			.stream()
@@ -116,12 +105,13 @@ public final class Mappers {
 
     public static final String getEntityName(Class<?> daoClass) {
         Class<?>[] genericTypes = getGenericType(daoClass);
-        Entity entity = genericTypes[0].getAnnotation(Entity.class);
+        final Class<?> entityType = genericTypes[0];
+        Entity entity = entityType.getAnnotation(Entity.class);
         return ObjectOperation.functionNonNullOrElseGet(
                 entity,
                 it -> {
-                    String name = it.name();
-                    return Objects.equals("", name) ? daoClass.getSimpleName() : name;
+                    String name = it.tableName();
+                    return StringOperation.isTrimEmptyOrNull(name) ? entityType.getSimpleName() : name;
                 },
                 daoClass::getSimpleName);
     }

@@ -19,4 +19,5 @@ public class Entity {
     private String name;
     private Class<?> definition;
     private List<Property> properties;
+    private Property primaryKey;
 }

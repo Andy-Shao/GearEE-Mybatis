@@ -1,3 +1,5 @@
+CREATE DATABASE mybatis;
+
 DROP TABLE IF EXISTS user;
 CREATE TABLE user (
 user_name varchar(100) NOT NULL,

@@ -1,6 +1,10 @@
 package org.example.mybatis.mapping;
 
 import com.github.andyshao.mybatis.core.mapping.CoreMapping;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
 import org.example.mybatis.domain.User;
 
 /**
@@ -11,5 +15,10 @@ import org.example.mybatis.domain.User;
  *
  * @author Andy.Shao
  */
+@Mapper
 public interface UserMapping extends CoreMapping<User> {
+
+    @Select("SELECT * FROM user WHERE user_name=#{username}")
+    @ResultMap("DEFAULT_RESULT_MAP")
+    User findByUsername(@Param("username") String username);
 }

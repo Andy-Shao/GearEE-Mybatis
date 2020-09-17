@@ -1,9 +1,11 @@
 package com.github.andyshao.mybatis.core.mapping.impl;
 
 import com.github.andyshao.mybatis.core.model.Entity;
+import com.google.common.collect.Lists;
 import org.apache.ibatis.mapping.ResultMapping;
 import org.apache.ibatis.session.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,8 +21,17 @@ public final class ResultMappings {
 
     public static List<ResultMapping> buildDomainClassResultMapping(
             Class<?> resultType, Configuration configuration, Entity entity) {
-        // TODO
-        return null;
+        final ArrayList<ResultMapping> result = Lists.newArrayList();
+        entity.getProperties()
+                .forEach(property -> {
+                    final ResultMapping resultMapping = new ResultMapping.Builder(configuration, property.getName())
+                            .column(property.getColumn())
+                            .javaType(property.getDefinition().getType())
+                            .jdbcType(property.getJdbcType())
+                            .build();
+                    result.add(resultMapping);
+                });
+        return result;
     }
 
     public static boolean isDomainClass(Class<?> resultType) {

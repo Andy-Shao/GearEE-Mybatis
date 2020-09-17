@@ -6,6 +6,7 @@ import com.github.andyshao.mybatis.core.annotation.Column;
 import com.github.andyshao.mybatis.core.annotation.Id;
 import com.github.andyshao.reflect.FieldOperation;
 import com.github.andyshao.util.ObjectOperation;
+import org.apache.ibatis.type.JdbcType;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -49,8 +50,8 @@ public final class AnnotationEntityAnalysis {
 
     private static Property analysis(Class<?> entityClass, Field field) {
         final Property.PropertyBuilder propertyBuilder = Property.builder();
-        final Id id = entityClass.getAnnotation(Id.class);
-        final Column column = entityClass.getAnnotation(Column.class);
+        final Id id = field.getAnnotation(Id.class);
+        final Column column = field.getAnnotation(Column.class);
         return propertyBuilder
                 .definition(field)
                 .isPrimaryKey(Objects.nonNull(id))
@@ -60,11 +61,11 @@ public final class AnnotationEntityAnalysis {
                 .build();
     }
 
-    public static String getJdbcType(Column column) {
+    public static JdbcType getJdbcType(Column column) {
         return ObjectOperation.functionNonNullOrDefault(
                 column,
                 Column::jdbcType,
-                Property.DEFAULT_JDBC_TYPE);
+                JdbcType.VARCHAR);
     }
 
     public static final String getColumnName(Field field, Column column) {

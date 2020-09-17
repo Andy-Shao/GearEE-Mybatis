@@ -6,8 +6,9 @@ import com.github.andyshao.mybatis.core.annotation.Id;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.ibatis.type.JdbcType;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Title: <br>
@@ -28,10 +29,10 @@ public class User {
     private String password;
     @Column("create_user")
     private String createUser;
-    @Column(value = "create_time", jdbcType = "TIMESTAMP")
-    private LocalDate createTime;
+    @Column(value = "create_time", jdbcType = JdbcType.TIMESTAMP)
+    private LocalDateTime createTime;
     @Column("update_user")
     private String updateUser;
-    @Column(value = "update_time", jdbcType = "TIMESTAMP")
-    private LocalDate updateTime;
+    @Column(value = "update_time", jdbcType = JdbcType.TIMESTAMP)
+    private LocalDateTime updateTime;
 }

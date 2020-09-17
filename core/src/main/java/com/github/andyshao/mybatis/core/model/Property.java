@@ -2,6 +2,7 @@ package com.github.andyshao.mybatis.core.model;
 
 import lombok.Builder;
 import lombok.Getter;
+import org.apache.ibatis.type.JdbcType;
 
 import java.lang.reflect.Field;
 
@@ -16,10 +17,9 @@ import java.lang.reflect.Field;
 @Getter
 @Builder
 public class Property {
-    public static final String DEFAULT_JDBC_TYPE = "VARCHAR";
     private Field definition;
     private String column;
     private String name;
-    private String jdbcType;
+    private JdbcType jdbcType;
     private Boolean isPrimaryKey;
 }

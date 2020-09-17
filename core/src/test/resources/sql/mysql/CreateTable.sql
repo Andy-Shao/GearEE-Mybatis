@@ -31,3 +31,5 @@ PARTITION BY RANGE (log_date) (
   PARTITION p5 VALUES LESS THAN MAXVALUE
 )
 ;
+
+INSERT INTO user(user_name, password, create_user) VALUES('andy.shao', '1303595', 'ShaoWeiChuang');

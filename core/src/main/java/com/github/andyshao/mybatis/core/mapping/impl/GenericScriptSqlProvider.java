@@ -1,5 +1,10 @@
 package com.github.andyshao.mybatis.core.mapping.impl;
 
+import com.github.andyshao.mybatis.core.annotation.Entity;
+import com.github.andyshao.util.ObjectOperation;
+
+import java.util.Objects;
+
 /**
  * 
  * 
@@ -11,6 +16,15 @@ package com.github.andyshao.mybatis.core.mapping.impl;
  * @author Andy.Shao
  *
  */
-public class GenericScriptSqlProvider {
+public final class GenericScriptSqlProvider {
+    //TODO
+
+    public static String countAll(Class<?> daoClass) {
+        return CoreMappingScriptSqlProvider.countAll(daoClass);
+    }
+
+    public static String findAll(Class<?> daoClass) {
+        return CoreMappingScriptSqlProvider.findAll(daoClass);
+    }
 
 }

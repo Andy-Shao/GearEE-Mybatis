@@ -10,6 +10,7 @@ import java.util.Objects;
 
 import com.github.andyshao.lang.StringOperation;
 import com.github.andyshao.mybatis.core.annotation.Column;
+import com.github.andyshao.mybatis.core.annotation.Entity;
 import com.github.andyshao.mybatis.core.annotation.Id;
 import com.github.andyshao.mybatis.core.mapping.ConditionalMapping;
 import com.github.andyshao.mybatis.core.mapping.CoreMapping;
@@ -18,6 +19,7 @@ import com.github.andyshao.mybatis.core.mapping.PageMapping;
 import com.github.andyshao.reflect.ClassOperation;
 import com.github.andyshao.reflect.FieldOperation;
 
+import com.github.andyshao.util.ObjectOperation;
 import lombok.NonNull;
 
 /**
@@ -110,5 +112,17 @@ public final class Mappers {
         }
 
         throw new UnsupportedOperationException();
+    }
+
+    public static final String getEntityName(Class<?> daoClass) {
+        Class<?>[] genericTypes = getGenericType(daoClass);
+        Entity entity = genericTypes[0].getAnnotation(Entity.class);
+        return ObjectOperation.functionNonNullOrElseGet(
+                entity,
+                it -> {
+                    String name = it.name();
+                    return Objects.equals("", name) ? daoClass.getSimpleName() : name;
+                },
+                daoClass::getSimpleName);
     }
 }

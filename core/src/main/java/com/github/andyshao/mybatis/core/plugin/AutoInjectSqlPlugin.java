@@ -63,7 +63,7 @@ public class AutoInjectSqlPlugin implements Interceptor {
         SqlSource sqlSource = new XMLLanguageDriver().createSqlSource(configuration,
                 provideScript(mappedStatement),
                 Objects.isNull(parameterObject) ? null : parameterObject.getClass());
-        setField( mappedStatement,"sqlSource", sqlSource);
+        setField(mappedStatement,"sqlSource", sqlSource);
     }
 
     void provideResultMap(MappedStatement mappedStatement, Configuration configuration) {

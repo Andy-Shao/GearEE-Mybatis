@@ -1,5 +1,6 @@
 package com.github.andyshao.mybatis.core.dto;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -20,13 +21,17 @@ public class PageableImpl implements Pageable {
 	private int pageNumber;
 	private int pageSize;
 	private long offset;
-	private Sort sort;
-	private Conditional conditional;
+	@Builder.Default
+	private Sort sort = Sort.unsorted();
+	@Builder.Default
+	private Conditional conditional = Conditional.excludeCondition();
+	@Builder.Default
+	private boolean countTotalSize = true;
 	
-	public static class PageableImplBuilder {
-		private Sort sort = Sort.unsorted();
-		private Conditional conditional = Conditional.excludeCondition();
-	}
+//	public static class PageableImplBuilder {
+//		private Sort sort = Sort.unsorted();
+//		private Conditional conditional = Conditional.excludeCondition();
+//	}
 	
 	@Override
 	public Pageable next() {

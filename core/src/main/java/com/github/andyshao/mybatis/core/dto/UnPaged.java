@@ -11,7 +11,7 @@ package com.github.andyshao.mybatis.core.dto;
  * @author Andy.Shao
  *
  */
-public enum Unpaged implements Pageable {
+public enum UnPaged implements Pageable {
 	INSTANCE;
 
 	@Override
@@ -51,6 +51,11 @@ public enum Unpaged implements Pageable {
 
 	@Override
 	public boolean hasPrevious() {
+		return false;
+	}
+
+	@Override
+	public boolean isCountTotalSize() {
 		return false;
 	}
 

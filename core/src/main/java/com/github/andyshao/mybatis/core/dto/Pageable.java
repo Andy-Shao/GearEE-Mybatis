@@ -14,14 +14,14 @@ import java.util.Optional;
  *
  */
 public interface Pageable {
-	static Pageable unpaged() {
-		return Unpaged.INSTANCE;
+	static Pageable unPaged() {
+		return UnPaged.INSTANCE;
 	}
 	default boolean isPaged() {
 		return true;
 	}
 	
-	default boolean isUnpaged() {
+	default boolean isUnPaged() {
 		return !isPaged();
 	}
 	
@@ -37,7 +37,9 @@ public interface Pageable {
 	Pageable previousOrFirst();
 	Pageable first();
 	boolean hasPrevious();
+	boolean isCountTotalSize();
+
 	default Optional<Pageable> toOptional() {
-		return isUnpaged() ? Optional.empty() : Optional.of(this);
+		return isUnPaged() ? Optional.empty() : Optional.of(this);
 	}
 }

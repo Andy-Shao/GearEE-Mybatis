@@ -35,7 +35,7 @@ public final class AnnotationEntityAnalysis {
         if(pk.size() > 1) throw new MybatisException("the quantity of entity primary key greater than one");
         return Entity.builder()
                 .definition(entityClass)
-                .name(ObjectOperation.functionNonNullOrDefault(
+                .tableName(ObjectOperation.functionNonNullOrDefault(
                         annotation,
                         it -> {
                             final String name = it.tableName();

@@ -35,7 +35,9 @@ public final class Mappers {
 	private Mappers() {}
 	public static final String GENERIC_DAO_QUERY = "GENERIC_DAO_QUERY";
 	public static final String DEFAULT_PK_NAME = "pk";
+	public static final String DEFAULT_PK_LIST_NAME = "pkLs";
 	public static final String DEFAULT_ENTITY_NAME = "entity";
+	public static final String DEFAULT_ENTITY_LIST_NAME = "entityLs";
 	public static final String DEFAULT_CONDITIONAL_NAME = "cond";
 	public static final String DEFAULT_SETS_NAME = "sets";
 	public static final String DEFAULT_SORT_NAME = "sort";
@@ -104,8 +106,7 @@ public final class Mappers {
     }
 
     public static final String getEntityName(Class<?> daoClass) {
-        Class<?>[] genericTypes = getGenericType(daoClass);
-        final Class<?> entityType = genericTypes[0];
+        final Class<?> entityType = getEntityType(daoClass);
         Entity entity = entityType.getAnnotation(Entity.class);
         return ObjectOperation.functionNonNullOrElseGet(
                 entity,
@@ -114,5 +115,14 @@ public final class Mappers {
                     return StringOperation.isTrimEmptyOrNull(name) ? entityType.getSimpleName() : name;
                 },
                 daoClass::getSimpleName);
+    }
+
+    public static Class<?> getEntityType(Class<?> daoClass) {
+        Class<?>[] genericTypes = getGenericType(daoClass);
+        return genericTypes[0];
+    }
+
+    public static com.github.andyshao.mybatis.core.model.Entity getEntity(Class<?> daoClass) {
+        return AnnotationEntityAnalysis.analysis(getEntityType(daoClass));
     }
 }

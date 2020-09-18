@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Builder
 public class Entity {
-    private String name;
+    private String tableName;
     private Class<?> definition;
     private List<Property> properties;
     private Property primaryKey;

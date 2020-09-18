@@ -37,7 +37,5 @@ public interface CurdMapping<ENTITY, PK extends Serializable> extends CoreMappin
     @Update(Mappers.GENERIC_DAO_QUERY)
     int updateByPrimaryKey(@Param(Mappers.DEFAULT_ENTITY_NAME) ENTITY entity);
     @Update(Mappers.GENERIC_DAO_QUERY)
-    int updateByPrimaryKeyList(@Param(Mappers.DEFAULT_ENTITY_LIST_NAME) List<ENTITY> entity);
-    @Update(Mappers.GENERIC_DAO_QUERY)
     int updateByPrimaryKeySelective(@Param(Mappers.DEFAULT_ENTITY_NAME) ENTITY entity);
 }

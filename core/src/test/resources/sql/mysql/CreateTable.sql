@@ -1,4 +1,5 @@
 CREATE DATABASE mybatis;
+use mybatis;
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user (

@@ -3,11 +3,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.Andy-Shao</groupId>
-    <artifactId>GearEE-Mybatis-Core</artifactId>
+    <artifactId>GearEE-Mybatis</artifactId>
     <!--<version>4.0-SNAPSHOT</version>-->
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
-    <name>GearEE-Mybatis-Core</name>
+    <packaging>pom</packaging>
+    <name>GearEE-Mybatis</name>
     <description>Enhance and formating the coding of JDK</description>
     <url>https://github.com/Andy-Shao/GearEE-Mybatis</url>
     <inceptionYear>2019</inceptionYear>
@@ -35,73 +35,16 @@
         <system>jira</system>
         <url>https://issues.sonatype.org/browse/OSSRH-10785</url>
     </issueManagement>
-    
+
     <properties>
         <java.version>11</java.version>
         <gear.build.sourceEncoding>UTF-8</gear.build.sourceEncoding>
-        <gear.maven-manager.version>2.0.5.RELEASE</gear.maven-manager.version>
     </properties>
 
-    <dependencyManagement>
-            <dependencies>
-                <dependency>
-                    <groupId>com.github.Andy-Shao</groupId>
-                    <artifactId>Gear-Maven-Manager</artifactId>
-                    <version>${gear.maven-manager.version}</version>
-                    <type>pom</type>
-                    <scope>import</scope>
-                </dependency>
-            </dependencies>
-    </dependencyManagement>
-    <dependencies>
-        <dependency>
-	    	<groupId>com.github.Andy-Shao</groupId>
-	    	<artifactId>Gear</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.mybatis</groupId>-->
-<!--			<artifactId>mybatis-spring</artifactId>-->
-<!--		</dependency>-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-
+    <modules>
+        <module>core</module>
+    </modules>
+    
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -178,17 +121,6 @@
                     <docencoding>${gear.build.sourceEncoding}</docencoding>
                     <javadocVersion>${java.version}</javadocVersion>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
                 <executions>
                     <execution>
                         <goals>

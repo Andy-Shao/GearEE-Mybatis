@@ -25,6 +25,7 @@ import java.util.Map;
  * @param <ENTITY> entity
  * @param <PK> primary key
  */
+@Deprecated
 public interface ConditionalMapping<ENTITY, PK extends Serializable> {
 	@Select(Mappers.CONDITIONAL_DAO_QUERY)
     List<ENTITY> findByConditional(@Param(Mappers.DEFAULT_CONDITIONAL_NAME) Conditional conditional);

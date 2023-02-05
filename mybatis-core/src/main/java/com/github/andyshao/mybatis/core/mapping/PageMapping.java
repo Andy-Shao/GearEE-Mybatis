@@ -20,6 +20,7 @@ import java.io.Serializable;
  * @param <ENTITY> entity
  * @param <PK> primary key
  */
+@Deprecated
 public interface PageMapping<ENTITY, PK extends Serializable> {
 	Page<ENTITY> findByPage(@Param(Mappers.DEFAULT_PAGE_NAME) Pageable page);
 //	Slice<ENTITY> findBySlice(@Param(Mappers.DEFAULT_PAGE_NAME) Pageable page);

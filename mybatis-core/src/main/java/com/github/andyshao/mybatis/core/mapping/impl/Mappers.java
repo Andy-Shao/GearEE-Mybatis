@@ -51,7 +51,6 @@ public final class Mappers {
 
     public static boolean isProcessing(String query){
         if(Objects.equals(GENERIC_DAO_QUERY, query)) return true;
-        if(Objects.equals(CONDITIONAL_DAO_QUERY, query)) return true;
         return false;
     }
 	
@@ -135,7 +134,6 @@ public final class Mappers {
     }
 
     public static Class<?> parseMethodClass(String sql) {
-        if(Objects.equals(CONDITIONAL_DAO_QUERY, sql)) return ConditionalMappingSqlProvider.class;
-        else return GenericScriptSqlProvider.class;
+        return GenericScriptSqlProvider.class;
     }
 }

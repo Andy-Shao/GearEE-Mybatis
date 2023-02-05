@@ -12,7 +12,7 @@ package com.github.andyshao.mybatis.core.mapping.impl;
  *
  */
 public final class GenericScriptSqlProvider {
-    //TODO
+    private GenericScriptSqlProvider(){}
 
     public static String countAll(Class<?> daoClass) {
         return CoreMappingScriptSqlProvider.countAll(daoClass);

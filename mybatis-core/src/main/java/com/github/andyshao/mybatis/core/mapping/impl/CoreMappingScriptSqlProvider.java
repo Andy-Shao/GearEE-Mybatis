@@ -9,6 +9,7 @@ package com.github.andyshao.mybatis.core.mapping.impl;
  * @author Andy.Shao
  */
 public final class CoreMappingScriptSqlProvider {
+    private CoreMappingScriptSqlProvider(){}
     public static String countAll(Class<?> daoClass) {
         StringBuilder sb = new StringBuilder();
         sb.append("<script>");

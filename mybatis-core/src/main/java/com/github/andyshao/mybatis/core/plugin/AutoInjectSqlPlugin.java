@@ -1,7 +1,6 @@
 package com.github.andyshao.mybatis.core.plugin;
 
 import com.github.andyshao.mybatis.core.mapping.impl.AnnotationResultMappingFactory;
-import com.github.andyshao.mybatis.core.mapping.impl.GenericScriptSqlProvider;
 import com.github.andyshao.mybatis.core.mapping.impl.Mappers;
 import com.github.andyshao.reflect.ClassOperation;
 import com.github.andyshao.reflect.FieldOperation;
@@ -39,25 +38,26 @@ public class AutoInjectSqlPlugin implements Interceptor {
 		Object[] args = invocation.getArgs();
         MappedStatement mappedStatement = (MappedStatement) args[0];
         Object parameterObject = args[1];
-        String sql = mappedStatement.getBoundSql(parameterObject).getSql();
-        if(Objects.equals(sql.trim(), Mappers.GENERIC_DAO_QUERY)) {
+        String sql = mappedStatement.getBoundSql(parameterObject).getSql().trim();
+        if(Mappers.isProcessing(sql)) {
             synchronized (this) {
                 sql = mappedStatement.getBoundSql(parameterObject).getSql();
-                if(Objects.equals(sql.trim(), Mappers.GENERIC_DAO_QUERY)) {
+                if(Mappers.isProcessing(sql)) {
                     Configuration configuration = mappedStatement.getConfiguration();
 
                     provideResultMap(mappedStatement, configuration);
-                    provideSqlSource(mappedStatement, parameterObject, configuration);
+                    provideSqlSource(mappedStatement, parameterObject, configuration, sql);
                 }
             }
         }
         return invocation.proceed();
 	}
 	
-	void provideSqlSource(MappedStatement mappedStatement, Object parameterObject, Configuration configuration)
+	void provideSqlSource(MappedStatement mappedStatement, Object parameterObject, Configuration configuration,
+                          String sql)
             throws IllegalAccessException, InvocationTargetException {
         SqlSource sqlSource = new XMLLanguageDriver().createSqlSource(configuration,
-                provideScript(mappedStatement),
+                provideScript(mappedStatement, sql),
                 Objects.isNull(parameterObject) ? null : parameterObject.getClass());
         setField(mappedStatement,"sqlSource", sqlSource);
     }
@@ -79,11 +79,12 @@ public class AutoInjectSqlPlugin implements Interceptor {
         FieldOperation.setFieldValue(mappedStatement, resultMapsField, fieldValue);
     }
 
-    static final String provideScript(MappedStatement mappedStatement) throws IllegalAccessException,
+    static final String provideScript(MappedStatement mappedStatement, String sql) throws IllegalAccessException,
             InvocationTargetException {
         Class<?> daoClass = parseDaoClass(mappedStatement);
-        Method provider = MethodOperation.getDeclaredMethod(GenericScriptSqlProvider.class,
-                parseMapperMethod(mappedStatement), Class.class);
+        Method provider = MethodOperation.getDeclaredMethod(Mappers.parseMethodClass(sql),
+                parseMapperMethod(mappedStatement),
+                Class.class);
         return MethodOperation.invoked(null, provider, daoClass).toString().trim();
     }
 

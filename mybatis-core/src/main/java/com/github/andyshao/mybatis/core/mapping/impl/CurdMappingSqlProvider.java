@@ -15,6 +15,7 @@ import java.util.Objects;
  * @author Andy.Shao
  */
 public final class CurdMappingSqlProvider {
+    private CurdMappingSqlProvider(){}
     public static String findByPrimaryKey(Class<?> daoClass) {
         final StringBuilder sb = new StringBuilder();
         final Entity entity = Mappers.getEntity(daoClass);

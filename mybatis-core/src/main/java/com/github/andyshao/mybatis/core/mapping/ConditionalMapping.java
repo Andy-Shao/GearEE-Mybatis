@@ -26,14 +26,14 @@ import java.util.Map;
  * @param <PK> primary key
  */
 public interface ConditionalMapping<ENTITY, PK extends Serializable> {
-	@Select(Mappers.GENERIC_DAO_QUERY)
+	@Select(Mappers.CONDITIONAL_DAO_QUERY)
     List<ENTITY> findByConditional(@Param(Mappers.DEFAULT_CONDITIONAL_NAME) Conditional conditional);
-	@Select(Mappers.GENERIC_DAO_QUERY)
+	@Select(Mappers.CONDITIONAL_DAO_QUERY)
 	List<ENTITY> findByConditionalAndSort(@Param(Mappers.DEFAULT_CONDITIONAL_NAME) Conditional conditional,
 										  @Param(Mappers.DEFAULT_SORT_NAME) Sort sort);
-	@Delete(Mappers.GENERIC_DAO_QUERY)
+	@Delete(Mappers.CONDITIONAL_DAO_QUERY)
     int deleteByConditional(@Param(Mappers.DEFAULT_CONDITIONAL_NAME)Conditional conditional);
-	@Update(Mappers.GENERIC_DAO_QUERY)
+	@Update(Mappers.CONDITIONAL_DAO_QUERY)
     int updateByConditional(@Param(Mappers.DEFAULT_SETS_NAME) Map<String, Object> sets,
                             @Param(Mappers.DEFAULT_CONDITIONAL_NAME)Conditional conditional);
 }

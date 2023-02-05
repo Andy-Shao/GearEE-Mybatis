@@ -9,6 +9,7 @@ package com.github.andyshao.mybatis.core.mapping.impl;
  * @author Andy.Shao
  */
 public final class ConditionalMappingSqlProvider {
+    private ConditionalMappingSqlProvider(){}
     public static String findByConditional(Class<?> daoClass){
         //TODO
         return null;

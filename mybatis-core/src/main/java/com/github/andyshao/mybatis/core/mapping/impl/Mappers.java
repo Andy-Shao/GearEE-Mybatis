@@ -19,6 +19,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 
@@ -34,6 +35,7 @@ import java.util.Map;
 public final class Mappers {
 	private Mappers() {}
 	public static final String GENERIC_DAO_QUERY = "GENERIC_DAO_QUERY";
+    public static final String CONDITIONAL_DAO_QUERY = "CONDITIONAL_DAO_QUERY";
 	public static final String DEFAULT_PK_NAME = "pk";
 	public static final String DEFAULT_PK_LIST_NAME = "pkLs";
 	public static final String DEFAULT_ENTITY_NAME = "entity";
@@ -46,6 +48,12 @@ public final class Mappers {
 	public static final Class[] GENERIC_DAO_CLASS = new Class[] {
             CoreMapping.class, CurdMapping.class, ConditionalMapping.class, PageMapping.class
     };
+
+    public static boolean isProcessing(String query){
+        if(Objects.equals(GENERIC_DAO_QUERY, query)) return true;
+        if(Objects.equals(CONDITIONAL_DAO_QUERY, query)) return true;
+        return false;
+    }
 	
 	public static final String getColumnName(@NonNull Field field) {
 		Column column = field.getAnnotation(Column.class);
@@ -124,5 +132,10 @@ public final class Mappers {
 
     public static com.github.andyshao.mybatis.core.model.Entity getEntity(Class<?> daoClass) {
         return AnnotationEntityAnalysis.analysis(getEntityType(daoClass));
+    }
+
+    public static Class<?> parseMethodClass(String sql) {
+        if(Objects.equals(CONDITIONAL_DAO_QUERY, sql)) return ConditionalMappingSqlProvider.class;
+        else return GenericScriptSqlProvider.class;
     }
 }

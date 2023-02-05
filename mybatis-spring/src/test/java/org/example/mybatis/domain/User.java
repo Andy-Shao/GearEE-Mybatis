@@ -1,4 +1,4 @@
-package org.example.mybatis.spring.domain;
+package org.example.mybatis.domain;
 
 import com.github.andyshao.mybatis.core.annotation.Column;
 import com.github.andyshao.mybatis.core.annotation.Entity;
@@ -6,6 +6,7 @@ import com.github.andyshao.mybatis.core.annotation.Id;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.apache.ibatis.type.JdbcType;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "username")
+@ToString
 public class User {
     @Id
     @Column("user_name")

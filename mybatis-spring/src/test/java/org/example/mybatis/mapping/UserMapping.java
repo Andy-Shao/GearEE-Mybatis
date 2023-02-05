@@ -1,6 +1,6 @@
 package org.example.mybatis.mapping;
 
-import com.github.andyshao.mybatis.core.mapping.CoreMapping;
+import com.github.andyshao.mybatis.core.mapping.CurdMapping;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
@@ -18,7 +18,7 @@ import java.util.List;
  * @author Andy.Shao
  */
 @Mapper
-public interface UserMapping extends CoreMapping<User> {
+public interface UserMapping extends CurdMapping<User, String> {
 
     @Select("SELECT * FROM user WHERE user_name=#{username}")
     @ResultMap("DEFAULT_RESULT_MAP")

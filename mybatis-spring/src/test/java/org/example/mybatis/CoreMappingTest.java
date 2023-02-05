@@ -10,6 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 /**
  * Title: <br>
  * Description: <br>
@@ -19,19 +21,16 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Andy.Shao
  */
 @ExtendWith({SpringExtension.class})
-@ContextConfiguration(locations = "classpath:spring.xml")
+@ContextConfiguration("classpath:spring.xml")
 @EnabledIf(expression = "${integration.test}", loadContext = true)
-public class PureFunctionTest {
+public class CoreMappingTest {
     @Autowired
     private UserMapping userMapping;
 
     @Test
-    public void testSpring() {}
-
-    @Test
-    public void testBasicFunction(){
-        final User user = this.userMapping.findByUsername("andy.shao");
-        Assertions.assertNotNull(user);
-        System.out.println(user);
+    public void testFindAll(){
+        final List<User> users = userMapping.findAll();
+        Assertions.assertNotNull(users);
+        Assertions.assertNotEquals(users.size(), 0);
     }
 }

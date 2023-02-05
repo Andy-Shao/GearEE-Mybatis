@@ -22,11 +22,12 @@ import java.time.LocalDateTime;
 @Entity(tableName = "user")
 @Getter
 @Setter
-@EqualsAndHashCode(of = "username")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class User {
     @Id
     @Column("user_name")
+    @EqualsAndHashCode.Include
     private String username;
     private String password;
     @Column("create_user")

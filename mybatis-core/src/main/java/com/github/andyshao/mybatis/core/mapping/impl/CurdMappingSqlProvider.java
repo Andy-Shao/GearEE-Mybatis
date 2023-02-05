@@ -34,7 +34,7 @@ public final class CurdMappingSqlProvider {
         final StringBuilder sb = new StringBuilder();
         final Entity entity = Mappers.getEntity(daoClass);
         sb.append("<script>");
-        sb.append("INSERT INTO (");
+        sb.append("INSERT INTO ").append(entity.getTableName()).append(" (");
         for(Property property : entity.getProperties()) {
             sb.append(property.getColumn()).append(",");
         }
@@ -53,7 +53,7 @@ public final class CurdMappingSqlProvider {
         final StringBuilder sb = new StringBuilder();
         final Entity entity = Mappers.getEntity(daoClass);
         sb.append("<script>");
-        sb.append("INSERT INTO (");
+        sb.append("INSERT INTO ").append(entity.getTableName()).append(" (");
         for(Property property : entity.getProperties()) {
             sb.append(property.getColumn()).append(",");
         }
@@ -76,7 +76,7 @@ public final class CurdMappingSqlProvider {
         final Entity entity = Mappers.getEntity(daoClass);
         final List<Property> properties = entity.getProperties();
         sb.append("<script>");
-        sb.append("INSERT INTO (");
+        sb.append("INSERT INTO ").append(entity.getTableName()).append(" (");
         for(int i = 0; i< properties.size(); i++) {
             final Property property = properties.get(i);
             sb.append("<if test=\"")

@@ -39,7 +39,7 @@
     <properties>
         <java.version>11</java.version>
         <gear.build.sourceEncoding>UTF-8</gear.build.sourceEncoding>
-        <gear.maven-manager.version>2.0.5.RELEASE</gear.maven-manager.version>
+        <gear.maven-manager.version>2.0.6-SNAPSHOT</gear.maven-manager.version>
     </properties>
 
     <dependencyManagement>
@@ -77,11 +77,6 @@
         <dependency>
             <groupId>com.github.Andy-Shao</groupId>
             <artifactId>GearEE-Mybatis-Core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

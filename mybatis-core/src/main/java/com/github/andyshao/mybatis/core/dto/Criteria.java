@@ -20,7 +20,19 @@ import java.util.List;
 @Getter
 @Builder
 public class Criteria {
-	private String condition;
+    public static enum Condition {
+        NOT_LIKE("NOT LIKE"), LIKE("LIKE"), BETWEEN("BETWEEN"),
+        NOT_BETWEEN("NOT BETWEEN"), EQUAL("="), NOT_EQUAL("&lt;&gt;"),
+        IS_NULL("IS NULL"), IS_NOT_NULL("IS NOT NULL"), IN("IN"),
+        NOT_IN("NOT IN"), GREATER("&gt;"), LESS("&lts"),
+        GREATER_EQUAL("&gt;="), LESS_EQUAL("&lt;="), OR("OR");
+        @Getter
+        private final String expression;
+        Condition(String exp) {
+            this.expression = exp;
+        }
+    }
+	private Condition condition;
     private String column;
     private Object value;
     private Object secondValue;
@@ -38,7 +50,7 @@ public class Criteria {
         private List<Criteria> criteriaList = new ArrayList<>();
     }
 
-    protected void addCriterion(String condition, Object value, String property) {
+    protected void addCriterion(Condition condition, Object value, String property) {
         if (value == null) {
             throw new RuntimeException("Value for " + property + " cannot be null");
         }
@@ -61,7 +73,7 @@ public class Criteria {
         this.criteriaList.add(builder.build());
     }
 
-    protected void addCriterion(String condition, String property) {
+    protected void addCriterion(Condition condition, String property) {
         if (condition == null) {
             throw new RuntimeException("Value for condition cannot be null");
         }
@@ -78,7 +90,7 @@ public class Criteria {
                 .build());
     }
 
-    protected void addCriterion(String condition, Object value1, Object value2, String property) {
+    protected void addCriterion(Condition condition, Object value1, Object value2, String property) {
         if (value1 == null || value2 == null) {
             throw new RuntimeException("Between values for " + property + " cannot be null");
         }
@@ -98,72 +110,72 @@ public class Criteria {
     }
 
     public Criteria andIsNull(String property) {
-        addCriterion("is null", property);
+        addCriterion(Condition.IS_NULL, property);
         return this;
     }
 
     public Criteria andIsNotNull(String property) {
-        addCriterion("is not null", property);
+        addCriterion(Condition.IS_NOT_NULL, property);
         return this;
     }
 
     public Criteria andEqualTo(Object value, String property) {
-        addCriterion("=", value, property);
+        addCriterion(Condition.EQUAL, value, property);
         return this;
     }
 
     public Criteria andNotEqualTo(Object value, String property) {
-        addCriterion("<>", value, property);
+        addCriterion(Condition.NOT_EQUAL, value, property);
         return this;
     }
 
     public Criteria andGreaterThan(Object value, String property) {
-        addCriterion(">", value, property);
+        addCriterion(Condition.GREATER, value, property);
         return this;
     }
 
     public Criteria andGreaterThanOrEqualTo(Object value, String property) {
-        addCriterion(">=", value, property);
+        addCriterion(Condition.GREATER_EQUAL, value, property);
         return this;
     }
 
     public Criteria andLessThan(Object value, String property) {
-        addCriterion("<", value, property);
+        addCriterion(Condition.LESS, value, property);
         return this;
     }
 
     public Criteria andLessThanOrEqualTo(Object value, String property) {
-        addCriterion("<=", value, property);
+        addCriterion(Condition.LESS_EQUAL, value, property);
         return this;
     }
 
     public Criteria andIn(List<Object> values, String property) {
-        addCriterion("in", values, property);
+        addCriterion(Condition.IN, values, property);
         return this;
     }
 
     public Criteria andNotIn(List<Object> values, String property) {
-        addCriterion("not in", values, property);
+        addCriterion(Condition.NOT_IN, values, property);
         return this;
     }
 
     public Criteria andBetween(Object value1, Object value2, String property) {
-        addCriterion("between", value1, value2, property);
+        addCriterion(Condition.BETWEEN, value1, value2, property);
         return this;
     }
 
     public Criteria andIdNotBetween(Object value1, Object value2, String property) {
-        addCriterion("not between", value1, value2, property);
+        addCriterion(Condition.NOT_BETWEEN, value1, value2, property);
         return this;
     }
 
     public Criteria andLike(String value, String property) {
-        addCriterion("like", value, property);
+        addCriterion(Condition.LIKE, value, property);
         return this;
     }
 
     public Criteria andNotLike(String value, String property) {
-        addCriterion("not like", value, property);
+        addCriterion(Condition.NOT_LIKE, value, property);
         return this;
     }
 }

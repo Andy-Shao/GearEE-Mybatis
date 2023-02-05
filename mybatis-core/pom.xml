@@ -39,7 +39,7 @@
     <properties>
         <java.version>11</java.version>
         <gear.build.sourceEncoding>UTF-8</gear.build.sourceEncoding>
-        <gear.maven-manager.version>2.0.5.RELEASE</gear.maven-manager.version>
+        <gear.maven-manager.version>2.0.6-SNAPSHOT</gear.maven-manager.version>
     </properties>
 
     <dependencyManagement>
@@ -62,10 +62,6 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.mybatis</groupId>-->
-<!--			<artifactId>mybatis-spring</artifactId>-->
-<!--		</dependency>-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>

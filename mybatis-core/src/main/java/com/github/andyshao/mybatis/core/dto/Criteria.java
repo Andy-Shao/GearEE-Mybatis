@@ -1,10 +1,10 @@
 package com.github.andyshao.mybatis.core.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.Builder;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -50,7 +50,8 @@ public class Criteria {
                 .valid(true)
                 .condition(condition)
                 .value(value)
-                .column(this.conditional.getColumn(property))
+//                .column(this.conditional.getColumn(property))
+                .column(property)
                 .typeHandler(null);
         if(value instanceof List) {
             builder.listValue(true);

@@ -1,17 +1,16 @@
 package com.github.andyshao.mybatis.core.mapping;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-
+import com.github.andyshao.mybatis.core.dto.Conditional;
+import com.github.andyshao.mybatis.core.dto.Sort;
+import com.github.andyshao.mybatis.core.mapping.impl.Mappers;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.github.andyshao.mybatis.core.dto.Conditional;
-import com.github.andyshao.mybatis.core.dto.Sort;
-import com.github.andyshao.mybatis.core.mapping.impl.Mappers;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 

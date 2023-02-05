@@ -18,6 +18,10 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="typeAliasesPackage" value="org.example.mybatis.spring.domain"/>
         <property name="mapperLocations" value="classpath*:org/example/mybatis/mapper/*.xml"/>
-        <property name="configLocation" value="mybatis-config.xml"/>
+<!--        <property name="configLocation" value="mybatis-config.xml"/>-->
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 </beans>

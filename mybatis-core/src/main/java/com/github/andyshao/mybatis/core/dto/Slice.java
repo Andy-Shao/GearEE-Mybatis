@@ -16,6 +16,7 @@ import java.util.stream.Stream;
  * @author Andy.Shao
  *
  */
+@Deprecated
 public interface Slice<T> {
 	int getNumber();
 	int getSize();
@@ -29,7 +30,7 @@ public interface Slice<T> {
 	Sort getSort();
 	Conditional getConditional();
 	default Pageable getPageable() {
-		return PageRequest.of(this.getNumber(), this.getSize(), this.getConditional(), this.getSort());
+		return PageRequest.of(this.getNumber(), this.getSize());
 	}
 	Pageable nextPageable();
 	Pageable previousPageable();

@@ -28,15 +28,12 @@ public interface Pageable {
 	int getPageNumber();
 	int getPageSize();
 	long getOffset();
-	Sort getSort();
-	Conditional getConditional();
-	default Sort getSortOr(Sort sort) {
-		return getSort().isSorted() ? getSort() : sort;
-	}
 	Pageable next();
 	Pageable previousOrFirst();
 	Pageable first();
-	boolean hasPrevious();
+	default boolean hasPrevious() {
+		return getPageNumber() > 1;
+	}
 	boolean isCountTotalSize();
 
 	default Optional<Pageable> toOptional() {

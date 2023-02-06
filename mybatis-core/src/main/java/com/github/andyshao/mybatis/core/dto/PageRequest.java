@@ -14,16 +14,20 @@ package com.github.andyshao.mybatis.core.dto;
 public final class PageRequest {
 	private PageRequest() {}
 	
-	public static Pageable of(int pageNumber, int pageSize, Conditional conditional, Sort sort) {
-		return new PageableImpl.PageableImplBuilder()
-				.pageNumber(pageNumber)
-				.pageSize(pageSize)
-				.conditional(conditional)
-				.sort(sort)
+	public static Pageable of(int pageNumber, int pagSize, boolean countTotalSize) {
+		return builder(pageNumber, pagSize)
+				.countTotalSize(countTotalSize)
 				.build();
 	}
-	
-	public static Pageable of(int pageNumber, int pagSize) {
-		return of(pageNumber, pagSize, Conditional.excludeCondition(), Sort.unsorted());
+
+	public static Pageable of(int pageNumber, int pageSize) {
+		return builder(pageNumber, pageSize).build();
+	}
+
+	static PageableImpl.PageableImplBuilder builder(int pageNumber, int pageSize) {
+		return PageableImpl.builder()
+				.pageNumber(pageNumber)
+				.pageSize(pageSize)
+				.offset((long) (pageNumber - 1) * pageSize);
 	}
 }

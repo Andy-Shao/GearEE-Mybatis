@@ -3,10 +3,8 @@ package com.github.andyshao.mybatis.core.mapping.impl;
 import com.github.andyshao.lang.StringOperation;
 import com.github.andyshao.mybatis.core.annotation.Column;
 import com.github.andyshao.mybatis.core.annotation.Entity;
-import com.github.andyshao.mybatis.core.mapping.ConditionalMapping;
 import com.github.andyshao.mybatis.core.mapping.CoreMapping;
 import com.github.andyshao.mybatis.core.mapping.CurdMapping;
-import com.github.andyshao.mybatis.core.mapping.PageMapping;
 import com.github.andyshao.mybatis.core.model.AnnotationEntityAnalysis;
 import com.github.andyshao.reflect.ClassOperation;
 import com.github.andyshao.reflect.FieldOperation;
@@ -35,18 +33,21 @@ import java.util.Objects;
 public final class Mappers {
 	private Mappers() {}
 	public static final String GENERIC_DAO_QUERY = "GENERIC_DAO_QUERY";
+    @Deprecated
     public static final String CONDITIONAL_DAO_QUERY = "CONDITIONAL_DAO_QUERY";
 	public static final String DEFAULT_PK_NAME = "pk";
 	public static final String DEFAULT_PK_LIST_NAME = "pkLs";
 	public static final String DEFAULT_ENTITY_NAME = "entity";
 	public static final String DEFAULT_ENTITY_LIST_NAME = "entityLs";
+    @Deprecated
 	public static final String DEFAULT_CONDITIONAL_NAME = "cond";
 	public static final String DEFAULT_SETS_NAME = "sets";
+    @Deprecated
 	public static final String DEFAULT_SORT_NAME = "sort";
 	public static final String DEFAULT_PAGE_NAME = "pageable";
 	@SuppressWarnings("rawtypes")
 	public static final Class[] GENERIC_DAO_CLASS = new Class[] {
-            CoreMapping.class, CurdMapping.class, ConditionalMapping.class, PageMapping.class
+            CoreMapping.class, CurdMapping.class
     };
 
     public static boolean isProcessing(String query){

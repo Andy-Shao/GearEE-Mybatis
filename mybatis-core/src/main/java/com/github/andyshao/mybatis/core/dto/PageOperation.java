@@ -21,17 +21,12 @@ public final class PageOperation {
 	public static final Page<?> EMPTY = new Page() {
 
 		@Override
-		public int getNumber() {
+		public int getPageNumber() {
 			return 0;
 		}
 
 		@Override
-		public int getSize() {
-			return 0;
-		}
-
-		@Override
-		public int getNumberOfElements() {
+		public int getPageSize() {
 			return 0;
 		}
 
@@ -63,16 +58,6 @@ public final class PageOperation {
 		@Override
 		public boolean hasPrevious() {
 			return false;
-		}
-
-		@Override
-		public Sort getSort() {
-			return Sort.unsorted();
-		}
-
-		@Override
-		public Conditional getConditional() {
-			return Conditional.excludeCondition();
 		}
 
 		@Override

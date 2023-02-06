@@ -1,5 +1,6 @@
 package com.github.andyshao.mybatis.core.dto;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -14,37 +15,26 @@ import lombok.Getter;
  * @author Andy.Shao
  *
  */
-@Builder
+@Builder(access = AccessLevel.PACKAGE)
 @Getter
 public class PageableImpl implements Pageable {
 	private int pageNumber;
 	private int pageSize;
 	private long offset;
 	@Builder.Default
-	private Sort sort = Sort.unsorted();
-	@Builder.Default
-	private Conditional conditional = Conditional.excludeCondition();
-	@Builder.Default
 	private boolean countTotalSize = true;
-	
 	@Override
 	public Pageable next() {
-		return new PageableImplBuilder()
-				.pageNumber(this.pageNumber + 1)
-				.pageSize(this.pageSize)
-				.sort(this.sort)
-				.conditional(this.conditional)
+		return PageRequest.builder(this.pageNumber, this.pageSize)
+				.countTotalSize(this.countTotalSize)
 				.build();
 	}
 
 	@Override
 	public Pageable previousOrFirst() {
 		if(hasPrevious()) {
-			return new PageableImplBuilder()
-					.pageNumber(this.pageNumber - 1)
-					.pageSize(this.pageSize)
-					.sort(this.sort)
-					.conditional(this.conditional)
+			return PageRequest.builder(this.pageNumber, this.pageSize)
+					.countTotalSize(this.countTotalSize)
 					.build();
 		}
 		return this.first();
@@ -53,17 +43,8 @@ public class PageableImpl implements Pageable {
 	@Override
 	public Pageable first() {
 		if(this.pageNumber == 1) return this;
-		return new PageableImplBuilder()
-				.pageNumber(1)
-				.pageSize(this.pageSize)
-				.sort(this.sort)
-				.conditional(this.conditional)
+		return PageRequest.builder(1, this.pageSize)
+				.countTotalSize(this.countTotalSize)
 				.build();
-	}
-
-	@Override
-	public boolean hasPrevious() {
-		if(this.pageNumber > 1) return true;
-		return false;
 	}
 }

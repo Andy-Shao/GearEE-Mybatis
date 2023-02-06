@@ -1,17 +1,12 @@
 package com.github.andyshao.mybatis.core.dto;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import com.github.andyshao.lang.StringOperation;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 
@@ -24,6 +19,7 @@ import lombok.Getter;
  * @author Andy.Shao
  *
  */
+@Deprecated
 public class Sort implements Serializable{
 	private static final long serialVersionUID = 5840662984877280542L;
 	public static final Direction DEFAULT_DIRECTION = Direction.ASC;

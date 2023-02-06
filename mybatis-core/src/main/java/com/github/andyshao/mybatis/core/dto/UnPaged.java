@@ -3,7 +3,7 @@ package com.github.andyshao.mybatis.core.dto;
 /**
  * 
  * 
- * Title:<br>
+ * Title: 代表不分页<br>
  * Descript:<br>
  * Copyright: Copryright(c) Feb 20, 2019<br>
  * Encoding: UNIX UTF-8
@@ -27,11 +27,6 @@ public enum UnPaged implements Pageable {
 	@Override
 	public long getOffset() {
 		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Sort getSort() {
-		return Sort.unsorted();
 	}
 
 	@Override
@@ -62,11 +57,6 @@ public enum UnPaged implements Pageable {
 	@Override
 	public boolean isPaged() {
 		return false;
-	}
-
-	@Override
-	public Conditional getConditional() {
-		return Conditional.excludeCondition();
 	}
 
 }

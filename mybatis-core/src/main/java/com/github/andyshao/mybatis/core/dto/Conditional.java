@@ -1,14 +1,13 @@
 package com.github.andyshao.mybatis.core.dto;
 
+import com.github.andyshao.mybatis.core.mapping.impl.Mappers;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.github.andyshao.mybatis.core.mapping.impl.Mappers;
-
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 
@@ -21,6 +20,7 @@ import lombok.Setter;
  * @author Andy.Shao
  *
  */
+@Deprecated
 @Getter
 public class Conditional implements Serializable{
 	private static final long serialVersionUID = -8757030312995023290L;

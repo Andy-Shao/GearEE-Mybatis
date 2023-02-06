@@ -18,23 +18,19 @@ public final class ConditionalMappingSqlProvider {
         final Entity entity = Mappers.getEntity(daoClass);
         sb.append("<script>");
         sb.append("SELECT * FROM ").append(entity.getTableName());
-        //TODO
         sb.append("</script>");
         return sb.toString();
     }
 
     public static String findByConditionalAndSort(Class<?> daoClass){
-        //TODO
         return null;
     }
 
     public static String deleteByConditional(Class<?> daoClass){
-        //TODO
         return null;
     }
 
     public static String updateByConditional(Class<?> daoClass) {
-        //TODO
         return null;
     }
 }

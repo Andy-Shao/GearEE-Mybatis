@@ -23,6 +23,8 @@ public class PageableImpl implements Pageable {
 	private long offset;
 	@Builder.Default
 	private boolean countTotalSize = true;
+	@Builder.Default
+	private long totalSize = 0;
 	@Override
 	public Pageable next() {
 		return PageRequest.builder(this.pageNumber, this.pageSize)
@@ -46,5 +48,15 @@ public class PageableImpl implements Pageable {
 		return PageRequest.builder(1, this.pageSize)
 				.countTotalSize(this.countTotalSize)
 				.build();
+	}
+
+	@Override
+	public long getTotalSize() {
+		return this.totalSize;
+	}
+
+	@Override
+	public void setTotalSize(long totalSize) {
+		this.totalSize = totalSize;
 	}
 }

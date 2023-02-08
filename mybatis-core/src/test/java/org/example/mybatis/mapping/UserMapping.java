@@ -1,6 +1,8 @@
 package org.example.mybatis.mapping;
 
+import com.github.andyshao.mybatis.core.dto.Pageable;
 import com.github.andyshao.mybatis.core.mapping.CurdMapping;
+import com.github.andyshao.mybatis.core.mapping.impl.Mappers;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
@@ -30,4 +32,6 @@ public interface UserMapping extends CurdMapping<User, String> {
 
     @Select("SELECT count(*) FROM user")
     int userNumber();
+
+    List<User> findByCreateUserPage(@Param("createUser") String createUser, @Param(Mappers.DEFAULT_PAGE_NAME)Pageable pageable);
 }

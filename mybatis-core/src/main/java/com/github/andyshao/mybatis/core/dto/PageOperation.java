@@ -85,6 +85,15 @@ public final class PageOperation {
 			return this;
 		}
 	};
+
+	public static <T> Page<T> build(List<T> content, Pageable pageable) {
+		return PageImpl.<T>builder()
+				.content(content)
+				.totalElements(pageable.getTotalSize())
+				.pageSize(pageable.getPageSize())
+				.pageNumber(pageable.getPageNumber())
+				.build();
+	}
 	
 	private PageOperation() {}
 }

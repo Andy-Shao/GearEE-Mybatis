@@ -55,6 +55,16 @@ public enum UnPaged implements Pageable {
 	}
 
 	@Override
+	public long getTotalSize() {
+		return 0;
+	}
+
+	@Override
+	public void setTotalSize(long totalSize) {
+
+	}
+
+	@Override
 	public boolean isPaged() {
 		return false;
 	}

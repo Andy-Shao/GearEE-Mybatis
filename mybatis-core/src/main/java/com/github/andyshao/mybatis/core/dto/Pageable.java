@@ -35,6 +35,8 @@ public interface Pageable {
 		return getPageNumber() > 1;
 	}
 	boolean isCountTotalSize();
+	long getTotalSize();
+	void setTotalSize(long totalSize);
 
 	default Optional<Pageable> toOptional() {
 		return isUnPaged() ? Optional.empty() : Optional.of(this);

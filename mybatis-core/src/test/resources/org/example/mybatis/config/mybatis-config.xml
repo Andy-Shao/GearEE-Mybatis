@@ -6,6 +6,8 @@
     <plugins>
         <plugin interceptor="org.example.mybatis.plugin.TestingInterceptor"/>
         <plugin interceptor="com.github.andyshao.mybatis.core.plugin.AutoInjectSqlPlugin"/>
+        <plugin interceptor="com.github.andyshao.mybatis.core.plugin.PageablePlugin"/>
+<!--        <plugin interceptor="com.github.andyshao.mybatis.core.plugin.PagePlugin"/>-->
     </plugins>
     <environments default="development">
         <environment id="development">

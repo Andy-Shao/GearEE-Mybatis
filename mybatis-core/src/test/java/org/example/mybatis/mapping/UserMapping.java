@@ -33,5 +33,7 @@ public interface UserMapping extends CurdMapping<User, String> {
     @Select("SELECT count(*) FROM user")
     int userNumber();
 
+    @Select("SELECT * FROM user WHERE create_user=#{createUser}")
+    @ResultMap("DEFAULT_RESULT_MAP")
     List<User> findByCreateUserPage(@Param("createUser") String createUser, @Param(Mappers.DEFAULT_PAGE_NAME)Pageable pageable);
 }

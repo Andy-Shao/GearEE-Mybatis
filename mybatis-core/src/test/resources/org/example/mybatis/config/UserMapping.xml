@@ -11,12 +11,4 @@
         <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
-
-    <sql id="findByCreateUserModel">
-        SELECT * FROM user WHERE create_user = #{createUser}
-    </sql>
-
-    <select id="findByCreateUserPage" resultMap="DEFAULT_RESULT_MAP">
-        <include refid="findByCreateUserModel"/>
-    </select>
 </mapper>

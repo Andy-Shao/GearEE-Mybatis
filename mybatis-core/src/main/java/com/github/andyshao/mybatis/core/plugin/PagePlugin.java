@@ -23,6 +23,7 @@ import java.util.List;
  *
  * @author Andy.Shao
  */
+@Deprecated
 @Intercepts({
         @Signature(type = ResultSetHandler.class, method = "handleResultSets", args = {Statement.class})
 })

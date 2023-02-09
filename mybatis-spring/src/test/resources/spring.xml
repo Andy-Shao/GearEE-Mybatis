@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
-    <context:component-scan base-package="org.example.mybatis.spring"/>
+    <context:component-scan base-package="org.example.mybatis"/>
     <context:property-placeholder location="classpath:spring.properties"/>
     <import resource="classpath:org/example/mybatis/spring-mybatis.xml"/>
 </beans>

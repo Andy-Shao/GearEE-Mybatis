@@ -87,12 +87,16 @@ public final class PageOperation {
 	};
 
 	public static <T> Page<T> build(List<T> content, Pageable pageable) {
-		return PageImpl.<T>builder()
-				.content(content)
-				.totalElements(pageable.getTotalSize())
-				.pageSize(pageable.getPageSize())
+		final PageImpl.PageImplBuilder<T> page = PageImpl.builder();
+		page.content(content);
+		if(pageable instanceof UnPaged) {
+			page.totalElements(content.size());
+		} else {
+			page.totalElements(pageable.getTotalSize())
 				.pageNumber(pageable.getPageNumber())
-				.build();
+				.pageSize(pageable.getPageSize());
+		}
+		return page.build();
 	}
 	
 	private PageOperation() {}

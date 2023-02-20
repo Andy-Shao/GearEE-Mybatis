@@ -25,9 +25,19 @@ public class PageableImpl implements Pageable {
 	private boolean countTotalSize = true;
 	@Builder.Default
 	private long totalSize = 0;
+
+	static PageableImplBuilder builderTemple(int pageNumber, int pageSize) {
+		return PageableImpl.builder()
+				.pageNumber(pageNumber)
+				.pageSize(pageSize)
+				.offset((long) (pageNumber - 1) * pageSize);
+	}
+
+	public static class PageableImplBuilder {}
+
 	@Override
 	public Pageable next() {
-		return PageRequest.builder(this.pageNumber, this.pageSize)
+		return builderTemple(this.pageNumber, this.pageSize)
 				.countTotalSize(this.countTotalSize)
 				.build();
 	}
@@ -35,7 +45,7 @@ public class PageableImpl implements Pageable {
 	@Override
 	public Pageable previousOrFirst() {
 		if(hasPrevious()) {
-			return PageRequest.builder(this.pageNumber, this.pageSize)
+			return builderTemple(this.pageNumber, this.pageSize)
 					.countTotalSize(this.countTotalSize)
 					.build();
 		}
@@ -45,7 +55,7 @@ public class PageableImpl implements Pageable {
 	@Override
 	public Pageable first() {
 		if(this.pageNumber == 1) return this;
-		return PageRequest.builder(1, this.pageSize)
+		return builderTemple(1, this.pageSize)
 				.countTotalSize(this.countTotalSize)
 				.build();
 	}

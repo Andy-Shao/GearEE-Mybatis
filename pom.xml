@@ -5,7 +5,7 @@
     <groupId>com.github.Andy-Shao</groupId>
     <artifactId>GearEE-Mybatis</artifactId>
     <!--<version>4.0-SNAPSHOT/4.0.RELEASE</version>-->
-    <version>0.0.1.RELEASE</version>
+    <version>0.1.0.RELEASE</version>
     <packaging>pom</packaging>
     <name>GearEE-Mybatis</name>
     <description>Enhance and formating the coding of JDK</description>

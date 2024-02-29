@@ -5,7 +5,7 @@
     <groupId>com.github.Andy-Shao</groupId>
     <artifactId>GearEE-Mybatis-Spring</artifactId>
     <!--<version>4.0-SNAPSHOT/4.0.RELEASE</version>-->
-    <version>0.1.0.RELEASE</version>
+    <version>1.0.0.RELEASE</version>
     <packaging>jar</packaging>
     <name>GearEE-Mybatis-Spring</name>
     <description>Enhance and formating the coding of JDK</description>
@@ -37,9 +37,9 @@
     </issueManagement>
     
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <gear.build.sourceEncoding>UTF-8</gear.build.sourceEncoding>
-        <gear.maven-manager.version>2.0.7.RELEASE</gear.maven-manager.version>
+        <gear.maven-manager.version>3.0.0.RELEASE</gear.maven-manager.version>
     </properties>
 
     <dependencyManagement>
@@ -57,26 +57,32 @@
         <dependency>
 	    	<groupId>com.github.Andy-Shao</groupId>
 	    	<artifactId>Gear</artifactId>
+            <scope>compile</scope>
 		</dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
+            <scope>compile</scope>
         </dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
+            <scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
+            <scope>compile</scope>
 		</dependency>
         <dependency>
             <groupId>com.github.Andy-Shao</groupId>
             <artifactId>GearEE-Mybatis-Core</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -123,6 +129,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -147,11 +154,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.0</version>
+                <version>3.2.5</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -163,6 +171,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.13</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
@@ -173,6 +182,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -186,6 +196,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -195,6 +206,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
                 <configuration>
                     <encoding>${gear.build.sourceEncoding}</encoding>
                 </configuration>
@@ -202,6 +214,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.3</version>
                 <configuration>
                     <charset>${gear.build.sourceEncoding}</charset>
                     <encoding>${gear.build.sourceEncoding}</encoding>
@@ -219,6 +232,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -226,11 +240,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
             </plugin>
         </plugins>
     </build>
